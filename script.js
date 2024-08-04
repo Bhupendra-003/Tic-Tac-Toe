@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const choice = document.querySelectorAll(".img-block");
     const popupPage = document.getElementById("popup");
     const turnMsg = document.getElementsByClassName("turn");
-    const winPatters = [
+    const winPatterns = [
         [0, 1, 2],
         [0, 3, 6],
         [0, 4, 8],
@@ -39,10 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     turnMsg[0].innerText = "AI's turn";
                     box.style.backgroundImage = `url(images/${userChoice}-main.svg)`;
                     box.setAttribute("value", "0");
-                    let winner = checkWinner(boxes);
+                    let winner = checkWinner(Array.from(boxes));
                     if (winner === "0") {
                         setTimeout(()=>{
-                            showPopup("You Won!!")
+                            showPopup("You Won!!");
                         }, 500);
                     } else {
                         aiTakingTurn = true;
@@ -61,10 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedBox.style.backgroundImage = `url(images/${aiChoice}-main.svg)`;
             selectedBox.setAttribute("value", "1");
             turnMsg[0].innerText = "Your Turn";
-            let winner = checkWinner(boxes);
+            let winner = checkWinner(Array.from(boxes));
             if (winner === "1") {
                 setTimeout(()=>{
-                    showPopup("Computer Won!!");
+                    showPopup("AI Won!!");
                 }, 500);
             }
         }
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function checkWinner(boxes) {
-        for (let pattern of winPatters) {
+        for (let pattern of winPatterns) {
             let value1 = boxes[pattern[0]].getAttribute("value");
             let value2 = boxes[pattern[1]].getAttribute("value");
             let value3 = boxes[pattern[2]].getAttribute("value");
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function showPopup(message) {
-        let text = popupPage.getElementsByTagName("p");
+        let text = popupPage.getElementsByTagName("p")[1];
         text.innerText = message;
         popupPage.style.display = "flex";
 
@@ -99,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
             gamepage.style.display = "block";
             popupPage.style.display = "none";
         });
+        document.getElementById("pop-cross").addEventListener("click", () => {
+            popupPage.style.display = "none";
+        });
     }
 
     function resetGame() {
@@ -106,6 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         boxes.forEach((boxes) => {
             boxes.style.backgroundImage = "url('')";
             boxes.setAttribute("value", "-1");
-        })
-    }
+        });
+    };
 })
