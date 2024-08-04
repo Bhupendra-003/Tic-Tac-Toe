@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+    <div id="homepage" class="main-screen">
+        <img id="cross-bg" src="images/cross.svg" alt="">
+        <img id="circle-bg" src="images/circle.svg" alt="">
+        <p class="tittle">TIC-TAC-TOE</p>
+        <div class="choose">
+            <p>Pick who goes first</p>
+            <div class="boxes">
+                <div class="cross img-block"><img src="images/cross-main.svg" ></div>
+                <div class="circle img-block"><img src="images/circle-main.svg" ></div>    
+            </div>
+        </div>
+    </div>
+    <div id="gamepage" class="main-screen" style="display: none">
+        <div class="container">
+            <div class="timer">
+                <p>0:05</p>
+            </div>
+            <p class="turn">Your Turn</p>
+            <div class="draw-box">
+                <div id="s1" value="-1" class="square"></div>
+                <div id="s2" value="-1" class="square"></div>
+                <div id="s3" value="-1" class="square"></div>
+                <div id="s4" value="-1" class="square"></div>
+                <div id="s5" value="-1" class="square"></div>
+                <div id="s6" value="-1" class="square"></div>
+                <div id="s7" value="-1" class="square"></div>
+                <div id="s8" value="-1" class="square"></div>
+                <div id="s9" value="-1" class="square"></div>
+            </div>
+            <div class="reset">Reset</div>
+        </div>
+        <div id="popup">
+            <div id="pop-cross"><p>x</p></div>
+            <div id="popup-content">
+                <p>YOU WON!</p>
+                <div id="back-to-home" class="pop-button">HOME</div>
+                <div id="pop-reset" class="pop-button">RESET</div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
