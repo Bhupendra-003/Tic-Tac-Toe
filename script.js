@@ -18,10 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     let userChoice
     let aiChoice
-    let turn = true //true represents users turn
+    let aiTakingTurn = false;
 
     reset.addEventListener("click", resetGame);
-
     choice.forEach((choice) => {
         choice.addEventListener("click", () => {
             userChoice = choice.classList[0];
@@ -35,29 +34,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     boxes.forEach((box) => {
         box.addEventListener("click", () => {
-            if (box.getAttribute("value") === "-1") {
-                if (turn) {
+            if (!aiTakingTurn) {
+                if (box.getAttribute("value") === "-1") {
                     turnMsg[0].innerText = "AI's turn";
                     box.style.backgroundImage = `url(images/${userChoice}-main.svg)`;
                     box.setAttribute("value", "0");
-                    turn = !turn;
+                    let winner = checkWinner(boxes);
+                    if (winner === "0") {
+                        setTimeout(()=>{
+                            showPopup("You Won!!")
+                        }, 500);
+                    } else {
+                        aiTakingTurn = true;
+                        setTimeout(takeAiTurn, 500); // delay for 1 second
+                    }
                 }
-                else {
-                    turnMsg[0].innerText = "Your Turn";
-                    box.style.backgroundImage = `url(images/${aiChoice}-main.svg)`;
-                    box.setAttribute("value", "1");
-                    turn = !turn;
-                }
-            }
-
-            let winner = checkWinner(boxes);
-            if (winner === "0") {
-                showPopup("You Won!!");
-            } else if (winner === "1") {
-                showPopup("Computer Won!!");
             }
         })
     })
+
+    function takeAiTurn() {
+        let emptyBoxes = Array.from(boxes).filter(box => box.getAttribute("value") === "-1");
+        if (emptyBoxes.length > 0) {
+            let randomIndex = Math.floor(Math.random() * emptyBoxes.length);
+            let selectedBox = emptyBoxes[randomIndex];
+            selectedBox.style.backgroundImage = `url(images/${aiChoice}-main.svg)`;
+            selectedBox.setAttribute("value", "1");
+            turnMsg[0].innerText = "Your Turn";
+            let winner = checkWinner(boxes);
+            if (winner === "1") {
+                setTimeout(()=>{
+                    showPopup("Computer Won!!");
+                }, 500);
+            }
+        }
+        aiTakingTurn = false;
+    }
 
     function checkWinner(boxes) {
         for (let pattern of winPatters) {
@@ -75,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
         text.innerText = message;
         popupPage.style.display = "flex";
 
-        document.getElementById("back-to-home").addEventListener("click",()=>{
+        document.getElementById("back-to-home").addEventListener("click", () => {
             resetGame();
             homepage.style.display = "block";
             gamepage.style.display = "none";
             popupPage.style.display = "none";
         })
-        document.getElementById("pop-reset").addEventListener("click", ()=>{
+        document.getElementById("pop-reset").addEventListener("click", () => {
             resetGame();
             homepage.style.display = "none";
             gamepage.style.display = "block";
@@ -97,4 +109,3 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 })
-
