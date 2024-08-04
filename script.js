@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let aiChoice
     let aiTakingTurn = false;
 
-    reset.addEventListener("click", resetGame);
     choice.forEach((choice) => {
         choice.addEventListener("click", () => {
             userChoice = choice.classList[0];
@@ -31,7 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
             popupPage.style.display = "none";
         })
     })
-
+    document.querySelector(".home-icon").addEventListener("click", ()=>{
+        resetGame();
+            homepage.style.display = "block";
+            gamepage.style.display = "none";
+            popupPage.style.display = "none";
+    });
+    
+    reset.addEventListener("click", resetGame);
     boxes.forEach((box) => {
         box.addEventListener("click", () => {
             if (!aiTakingTurn) {
