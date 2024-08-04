@@ -16,65 +16,108 @@ document.addEventListener('DOMContentLoaded', () => {
         [3, 4, 5],
         [6, 7, 8],
     ];
-    let userChoice
-    let aiChoice
+    const popSleepTime = 300;
+    let userChoice;
+    let aiChoice;
     let aiTakingTurn = false;
 
     choice.forEach((choice) => {
         choice.addEventListener("click", () => {
             userChoice = choice.classList[0];
-            aiChoice = "";
-            userChoice == "cross" ? aiChoice = "circle" : aiChoice = "cross"
+            aiChoice = userChoice === "cross" ? "circle" : "cross";
             homepage.style.display = "none";
             gamepage.style.display = "block";
             popupPage.style.display = "none";
-        })
-    })
-    document.querySelector(".home-icon").addEventListener("click", ()=>{
-        resetGame();
-            homepage.style.display = "block";
-            gamepage.style.display = "none";
-            popupPage.style.display = "none";
+        });
     });
-    
+
+    document.querySelector(".home-icon").addEventListener("click", () => {
+        resetGame();
+        homepage.style.display = "block";
+        gamepage.style.display = "none";
+        popupPage.style.display = "none";
+    });
+
     reset.addEventListener("click", resetGame);
+
     boxes.forEach((box) => {
         box.addEventListener("click", () => {
             if (!aiTakingTurn) {
                 if (box.getAttribute("value") === "-1") {
-                    turnMsg[0].innerText = "AI's turn";
                     box.style.backgroundImage = `url(images/${userChoice}-main.svg)`;
                     box.setAttribute("value", "0");
                     let winner = checkWinner(Array.from(boxes));
                     if (winner === "0") {
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             showPopup("You Won!!");
-                        }, 500);
+                        }, popSleepTime);
                     } else {
+                        turnMsg[0].innerText = "AI's turn";
                         aiTakingTurn = true;
-                        setTimeout(takeAiTurn, 500); // delay for 1 second
+                        setTimeout(takeAiTurn, 500); // delay for 0.5 second
                     }
                 }
             }
-        })
-    })
+        });
+    });
 
     function takeAiTurn() {
         let emptyBoxes = Array.from(boxes).filter(box => box.getAttribute("value") === "-1");
+        if(emptyBoxes.length==0){
+            setTimeout(() => {
+                showPopup("Draw!!");
+            }, popSleepTime);
+        }
         if (emptyBoxes.length > 0) {
-            let randomIndex = Math.floor(Math.random() * emptyBoxes.length);
-            let selectedBox = emptyBoxes[randomIndex];
-            selectedBox.style.backgroundImage = `url(images/${aiChoice}-main.svg)`;
-            selectedBox.setAttribute("value", "1");
-            turnMsg[0].innerText = "Your Turn";
+            // Prioritized AI moves
+            let bestMove = getBestMove(emptyBoxes);
+            bestMove.style.backgroundImage = `url(images/${aiChoice}-main.svg)`;
+            bestMove.setAttribute("value", "1");
             let winner = checkWinner(Array.from(boxes));
             if (winner === "1") {
-                setTimeout(()=>{
+                setTimeout(() => {
                     showPopup("AI Won!!");
-                }, 500);
+                }, popSleepTime);
+            }
+            else{
+                turnMsg[0].innerText = "Your Turn";
             }
         }
         aiTakingTurn = false;
+    }
+
+    function getBestMove(emptyBoxes) {
+        // Try to win
+        for (let box of emptyBoxes) {
+            box.setAttribute("value", "1");
+            if (checkWinner(Array.from(boxes)) === "1") {
+                box.setAttribute("value", "-1");
+                return box;
+            }
+            box.setAttribute("value", "-1");
+        }
+        // Block user from winning
+        for (let box of emptyBoxes) {
+            box.setAttribute("value", "0");
+            if (checkWinner(Array.from(boxes)) === "0") {
+                box.setAttribute("value", "-1");
+                return box;
+            }
+            box.setAttribute("value", "-1");
+        }
+        // Take center if available
+        if (boxes[4].getAttribute("value") === "-1") {
+            return boxes[4];
+        }
+        // Take a corner if available
+        const corners = [0, 2, 6, 8];
+        for (let i of corners) {
+            if (boxes[i].getAttribute("value") === "-1") {
+                return boxes[i];
+            }
+        }
+        // Take any remaining empty box
+        return emptyBoxes[0];
     }
 
     function checkWinner(boxes) {
@@ -86,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return value1;
             }
         }
+        return null;
     }
 
     function showPopup(message) {
@@ -98,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
             homepage.style.display = "block";
             gamepage.style.display = "none";
             popupPage.style.display = "none";
-        })
+        });
         document.getElementById("pop-reset").addEventListener("click", () => {
             resetGame();
             homepage.style.display = "none";
@@ -112,9 +156,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function resetGame() {
         turnMsg[0].innerText = "Your Turn";
-        boxes.forEach((boxes) => {
-            boxes.style.backgroundImage = "url('')";
-            boxes.setAttribute("value", "-1");
+        boxes.forEach((box) => {
+            box.style.backgroundImage = "url('')";
+            box.setAttribute("value", "-1");
         });
     };
-})
+});
