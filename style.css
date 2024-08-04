@@ -32,7 +32,7 @@ body {
     right: 0px;
 }
 
-.tittle {
+.title {
     color: white;
     font-weight: 700;
     /* TIC-TAC-TOE */
@@ -86,7 +86,7 @@ body {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
 }
 .img-block img{
-    width: 80px;;
+    width: 80px;
 }
 
 .container {
@@ -113,10 +113,8 @@ body {
     height: 41px;
     margin: 0px;
     padding: 0px;
-    font-family: 'Montserrat';
     font-size: 34px;
     font-family: "Montserrat", sans-serif;
-    font-optical-sizing: auto;
     font-style: normal;
     font-weight: 500;
     text-align: center;
@@ -155,7 +153,6 @@ body {
     border: 1px solid #D1D1D1;
     margin: 0px;
     padding: 10px;
-
     background-size: 71px;
     background-repeat: no-repeat;
     background-position: center;
@@ -225,8 +222,6 @@ body {
 }
 #popup-content{
     position: relative;
-    top: -10px;
-    left: -10px;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     padding: 20px 30px;
@@ -250,7 +245,7 @@ body {
 }
 .pop-button{
     color: white;
-    background: linear-gradient(162.46deg, #00D2FF 0%, #3A7BD5 100%);;
+    background: linear-gradient(162.46deg, #00D2FF 0%, #3A7BD5 100%);
     border-radius: 23px;
     width: 107px;
     height: 37px;
@@ -273,7 +268,7 @@ body {
 #pop-cross{
     z-index: inherit;
     position: absolute;
-    top: -75px;
+    top: 250px;
     left: 10px;
     border: 2px solid #1BA9EB;
     display: flex;
@@ -281,15 +276,17 @@ body {
     align-items: center;
     font-size: 23px;
     border-radius: 50%;
-    position: relative;
     width: 25px;
     height:25px;
     font-weight: 700;
     color: #1BA9EB;
     background-color: white;
+    transition: all 0.1s ease-in;
 }
 #pop-cross:hover{
-    box-shadow: 2px 2px 2px 2px rgba(38, 157, 255, 0.447);
+    width: 28px;
+    height: 28px;
+    font-size: 27px;
 }
 #pop-cross:active{
     /* background-color: #c8f5ff; */
