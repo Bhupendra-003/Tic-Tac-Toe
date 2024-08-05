@@ -2,5 +2,6 @@
     "CodeGPT.apiKey": "CodeGPT Plus Beta",
     "CodeGPT.Autocomplete.enabled": true,
     "CodeGPT.Autocomplete.suggestionDelay": 100,
-    "CodeGPT.Autocomplete.provider": "Ollama - codegemma:code"
+    "CodeGPT.Autocomplete.provider": "Ollama - codegemma:code",
+    "liveServer.settings.multiRootWorkspaceName": "Tic Tac Toe"
 }

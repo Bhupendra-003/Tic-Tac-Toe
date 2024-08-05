@@ -1,10 +1,10 @@
-*{
+* {
     -webkit-user-select: none;
     user-select: none;
 }
 
 body {
-    padding: 0px;
+    padding: 10px;
     margin: 0px;
     display: flex;
     justify-content: center;
@@ -14,6 +14,7 @@ body {
     min-height: 695px;
     font-family: 'Montserrat', sans-serif;
 }
+
 .main-screen {
     border-radius: 15px;
     margin-top: 20px;
@@ -22,14 +23,17 @@ body {
     height: 667px;
     background: linear-gradient(162.46deg, #00D2FF 0%, #3A7BD5 100%);
 }
+
 #cross-bg {
     position: absolute;
     top: 80px;
 }
 
 #circle-bg {
-    position: absolute;
-    right: 0px;
+    position: relative;
+    float: right;
+    overflow: hidden; 
+
 }
 
 .title {
@@ -59,7 +63,7 @@ body {
     bottom: 0px;
 }
 
-.choose p{
+.choose p {
     margin: 0px 0px 10px 0px;
     color: white;
     padding: 0px;
@@ -69,9 +73,11 @@ body {
     font-family: 'Montserrat';
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
 }
-.boxes{
+
+.boxes {
     display: flex;
 }
+
 .img-block {
     display: flex;
     justify-content: center;
@@ -85,22 +91,25 @@ body {
     border-radius: 15px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
 }
-.img-block img{
+
+.img-block img {
     width: 80px;
 }
 
-.home-icon{
+.home-icon {
     position: absolute;
     width: 30px;
     height: 30px;
     top: 30px;
     left: 30px;
 }
-.home-icon i{
+
+.home-icon i {
     color: white;
     font-size: 1.9rem;
 }
-.home-icon i:hover{
+
+.home-icon i:hover {
     color: #cff6ff;
 }
 
@@ -134,7 +143,8 @@ body {
     font-weight: 500;
     text-align: center;
 }
-.turn{
+
+.turn {
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -144,7 +154,8 @@ body {
     font-size: 40px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
 }
-.draw-box{
+
+.draw-box {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 25px;
@@ -157,7 +168,8 @@ body {
     box-sizing: border-box;
     gap: 0px;
 }
-.square{
+
+.square {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,40 +184,50 @@ body {
     background-repeat: no-repeat;
     background-position: center;
 }
-.square img{
+
+.square img {
     width: 71px;
     height: 71px;
 }
-#s1{
+
+#s1 {
     border-top-color: white;
     border-left-color: white;
 }
-#s2{
+
+#s2 {
     border-top-color: white;
 }
-#s3{
+
+#s3 {
     border-top-color: white;
     border-right: white;
 }
-#s4{
+
+#s4 {
     border-left: white;
 }
-#s6{
+
+#s6 {
     border-right: white;
 }
-#s7{
+
+#s7 {
     border-bottom: white;
     border-left: white;
 }
-#s8{
+
+#s8 {
     border-bottom: white;
 
 }
-#s9{
+
+#s9 {
     border-bottom: white;
     border-right: white;
 }
-.reset{
+
+.reset {
     font-size: 1.3rem;
     display: flex;
     justify-content: center;
@@ -221,7 +243,7 @@ body {
     font-weight: 300;
 }
 
-#popup{
+#popup {
     border-radius: 15px;
     position: absolute;
     top: 0px;
@@ -235,7 +257,8 @@ body {
     background-color: #5585fe78;
     backdrop-filter: blur(4px);
 }
-#popup-content{
+
+#popup-content {
     position: relative;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
@@ -248,7 +271,7 @@ body {
     height: 100px;
 }
 
-#popup-content p{
+#popup-content p {
     color: #42AEED;
     padding: 0px;
     margin: 0px;
@@ -258,7 +281,8 @@ body {
     font-weight: 700;
     text-shadow: 10px 10px 10px 10px rgba(93, 195, 255, 0.5);
 }
-.pop-button{
+
+.pop-button {
     color: white;
     background: linear-gradient(162.46deg, #00D2FF 0%, #3A7BD5 100%);
     border-radius: 23px;
@@ -271,16 +295,20 @@ body {
     position: relative;
     top: 7px;
 }
-.pop-button:active{
+
+.pop-button:active {
     opacity: 0.8;
 }
-.pop-button:hover{
+
+.pop-button:hover {
     cursor: default;
 }
-#pop-reset{
+
+#pop-reset {
     margin-left: 35px;
 }
-#pop-cross{
+
+#pop-cross {
     z-index: inherit;
     position: absolute;
     top: 252px;
@@ -292,25 +320,39 @@ body {
     font-size: 23px;
     border-radius: 50%;
     width: 25px;
-    height:25px;
+    height: 25px;
     font-weight: 700;
     color: #1BA9EB;
     background-color: white;
     transition: all 0.1s ease-in;
 }
-#pop-cross:hover{
+
+#pop-cross:hover {
     top: 251px;
     left: 11px;
     width: 27px;
     height: 27px;
     font-size: 27px;
 }
-#pop-cross:active{
-    /* background-color: #c8f5ff; */
+
+#pop-cross:active {
     opacity: 0.8;
 }
-#pop-cross p{
+
+#pop-cross p {
     padding: 0px;
     position: relative;
     top: -2px;
+}
+
+@media (max-width: 600px) {
+    body {
+        height: 97vh;
+        min-height: 90vh;
+        min-width: 95vw;
+    }
+    .main-screen{
+        height: 100%;
+        margin-top: 0;
+    }
 }
